@@ -1,5 +1,6 @@
-(ns rules-ex.college
+(ns examples.college
   (:require [clara.rules :refer :all]
+            [clara.tools.viz :refer [show-logic!] :as viz]
             [clojure.pprint :refer [pprint]])
   (:gen-class))
 
@@ -15,6 +16,11 @@
   [:or
    [Grade (= type :sat) (> score 1500)]
    [Grade (= type :act) (> score 20)]]
+  =>
+  (insert! (->Accept)))
+
+(defrule rich-parents
+  [Parents (> income 2000000)]
   =>
   (insert! (->Accept)))
 
@@ -40,12 +46,14 @@
    (->Grade :sat 1650)])
 
 (defn -main
-  [& args]
+  []
   (let [session
-        (-> (mk-session 'rules-ex.college :cache false)
+        (-> (mk-session 'examples.college :cache false)
             (insert-all facts)
             (fire-rules))]
-    (println (str "Accepted: "
-                  (-> session (query get-acceptance) (->> (map  :?accept)) count pos?)))
-    (println (str "Aid     : "
-                  (-> session (query get-aid) first :?aid :amount (or 0))))))
+    (-> session
+        (query get-acceptance) (->> (map  :?accept))
+        count pos? (->> (str "Accepted: ")) println)
+    (-> session
+        (query get-aid) first :?aid :amount (or 0)
+        (->> (str "Aid     : ")) println)))

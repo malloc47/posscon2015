@@ -1,4 +1,4 @@
-(ns rules-ex.car
+(ns examples.car
   (:require [clara.rules :refer :all]
             [clojure.pprint :refer [pprint]])
   (:gen-class))
@@ -33,7 +33,7 @@
 
 (defn -main
   [& args]
-  (-> (mk-session 'rules-ex.car :cache false)
+  (-> (mk-session 'examples.car :cache false)
       (insert-all facts)
       (fire-rules)
       (query get-policies)
