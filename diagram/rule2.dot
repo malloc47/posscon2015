@@ -1,0 +1,22 @@
+digraph {
+graph [bgcolor=transparent];
+"0--528457357" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Parents</b></td></tr><tr><td>[(&gt; income 2000000)]</td></tr></table>>];
+"-528457357" [shape=rectangle,style=bold,label=<<table border="0" cellborder="0"><tr><td>examples.college/rich-parents</td></tr><tr><td>(clara.rules/insert! (examples.college/-&gt;Accept))</td></tr></table>>];
+"0--528457357" -> "-528457357";
+"0-307614313" [shape=diamond,label=and];
+"1-307614313" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Grade</b></td></tr><tr><td>[(= type :gpa) (&gt; score 3.0)]</td></tr></table>>];
+"2-307614313" [shape=diamond,label=or];
+"3-307614313" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Grade</b></td></tr><tr><td>[(= type :sat) (&gt; score 1500)]</td></tr></table>>];
+"4-307614313" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Grade</b></td></tr><tr><td>[(= type :act) (&gt; score 20)]</td></tr></table>>];
+"1-307614313" -> "0-307614313";
+"2-307614313" -> "0-307614313";
+"3-307614313" -> "2-307614313";
+"4-307614313" -> "2-307614313";
+"307614313" [shape=rectangle,style=bold,label=<<table border="0" cellborder="0"><tr><td>examples.college/good-enough-grades</td></tr><tr><td>(clara.rules/insert! (examples.college/-&gt;Accept))</td></tr></table>>];
+"0-307614313" -> "307614313";
+"0--1462805209" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Accept</b></td></tr><tr><td>[]</td></tr></table>>];
+"-1462805209" [shape=rectangle,style=bold,label=<<table border="0" cellborder="0"><tr><td>examples.college/get-acceptance</td></tr><tr><td></td></tr></table>>];
+"0--1462805209" -> "-1462805209";
+"-528457357" -> "0--1462805209" [style=dashed];
+"307614313" -> "0--1462805209" [style=dashed];
+} 

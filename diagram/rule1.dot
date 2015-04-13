@@ -1,0 +1,18 @@
+digraph {
+graph [bgcolor=transparent];
+"0--1265903684" [shape=diamond,label=and];
+"1--1265903684" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Grade</b></td></tr><tr><td>[(= type :gpa) (&gt; score 3.0)]</td></tr></table>>];
+"2--1265903684" [shape=diamond,label=or];
+"3--1265903684" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Grade</b></td></tr><tr><td>[(= type :sat) (&gt; score 1500)]</td></tr></table>>];
+"4--1265903684" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Grade</b></td></tr><tr><td>[(= type :act) (&gt; score 20)]</td></tr></table>>];
+"1--1265903684" -> "0--1265903684";
+"2--1265903684" -> "0--1265903684";
+"3--1265903684" -> "2--1265903684";
+"4--1265903684" -> "2--1265903684";
+"-1265903684" [shape=rectangle,style=bold,label=<<table border="0" cellborder="0"><tr><td>examples.college/good-enough-grades</td></tr><tr><td>(clara.rules/insert! (examples.college/-&gt;Accept))</td></tr></table>>];
+"0--1265903684" -> "-1265903684";
+"0--1351294164" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Accept</b></td></tr><tr><td>[]</td></tr></table>>];
+"-1351294164" [shape=rectangle,style=bold,label=<<table border="0" cellborder="0"><tr><td>examples.college/get-acceptance</td></tr><tr><td></td></tr></table>>];
+"0--1351294164" -> "-1351294164";
+"-1265903684" -> "0--1351294164" [style=dashed];
+} 

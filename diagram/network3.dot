@@ -1,0 +1,37 @@
+digraph {
+graph [bgcolor=transparent];
+"2" -> "6";
+"6" -> "10";
+"3" -> "6";
+"6" -> "10";
+"7" -> "11";
+"0" -> "1";
+"1" -> "4";
+"4" -> "8";
+"2" [shape=diamond,label="JOIN ON: #{}"];
+"6" [shape=diamond,label="JOIN ON: #{}"];
+"10" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td>examples.college/good-enough-grades</td></tr><tr><td>(clara.rules/insert! (examples.college/-&gt;Accept))</td></tr></table>>];
+"3" [shape=diamond,label="JOIN ON: #{}"];
+"6" [shape=diamond,label="JOIN ON: #{}"];
+"10" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td>examples.college/good-enough-grades</td></tr><tr><td>(clara.rules/insert! (examples.college/-&gt;Accept))</td></tr></table>>];
+"7" [shape=diamond,label="JOIN ON: #{}"];
+"11" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td>examples.college/rich-parents</td></tr><tr><td>(clara.rules/insert! (examples.college/-&gt;Accept))</td></tr></table>>];
+"0" [shape=diamond,label="JOIN ON: #{}"];
+"1" [shape=diamond,label="JOIN ON: #{}"];
+"4" [shape=diamond,label="JOIN ON: #{}"];
+"8" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td>examples.college/aid-package</td></tr><tr><td>(clara.rules/insert! (examples.college/-&gt;Aid 20000))</td></tr></table>>];
+"1673356046" -> "4";
+"-1105303345" -> "1";
+"2004659421" -> "0";
+"1746906394" -> "7";
+"-775204708" -> "3";
+"1470601992" -> "6";
+"-1017431193" -> "2";
+"1673356046" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td><b>Parents</b></td></tr><tr><td>[(&lt; income 60000)]</td></tr></table>>];
+"-1105303345" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td><b>Applicant</b></td></tr><tr><td>[(&lt; age 26)]</td></tr></table>>];
+"2004659421" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td><b>Accept</b></td></tr><tr><td>[]</td></tr></table>>];
+"1746906394" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td><b>Parents</b></td></tr><tr><td>[(&gt; income 2000000)]</td></tr></table>>];
+"-775204708" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td><b>Grade</b></td></tr><tr><td>[(= type :sat) (&gt; score 1500)]</td></tr></table>>];
+"1470601992" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td><b>Grade</b></td></tr><tr><td>[(= type :gpa) (&gt; score 3.0)]</td></tr></table>>];
+"-1017431193" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td><b>Grade</b></td></tr><tr><td>[(= type :act) (&gt; score 20)]</td></tr></table>>];
+} 

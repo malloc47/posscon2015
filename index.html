@@ -69,12 +69,12 @@
 
 	<section>
 	  <section>
-	    <h3><span style="opacity:0.50">Rules Engine</span></h3>
-	    <h1>Background</h1>
+	    <img src="img/beeker.gif" style="border: none; box-shadow: none;"  alt="what is this I don't even">
+	    <h3>What is a Rules Engine?</h3>
 	  </section>
 
 	  <section>
-	    <h3><span style="opacity:0.50">Related Terms</span></h3>
+	    <h3>Related Terms</h3>
 	    <ul>
 	      <li>Expert Systems (1970s-1980s)
 		<ul>
@@ -95,13 +95,12 @@
 	  <!--   </ul> -->
 	  <!-- </section> -->
 
-	  <section>
-	    <img src="img/beeker.gif" style="border: none; box-shadow: none;"  alt="what is this I don't even">
-	    <h3><span style="opacity:0.50">What is a rules engine?</span></h3>
-	  </section>
+	  <!-- <section> -->
+	  <!--   <h3><span style="opacity:0.50">What is a rules engine?</span></h3> -->
+	  <!-- </section> -->
 
 	  <section>
-	    <h3><span style="opacity:0.50">It is an...</h3>
+	    <h3>A Rules Engine is an...</h3>
 	    <p><strong>Expert system</strong> that applies an <strong>inference engine</strong> to a <strong>knowledge base</strong> consisting of <strong>if/then
 		rules</strong> and <strong>facts</strong>, executing <strong>arbitrary actions</strong> or inserting <strong>new facts</strong> when a rule matches.</p>
 	  </section>
@@ -113,6 +112,17 @@
 	      <li><strong>Fact</strong>: base language object (Java object, Ruby hash, Clojure defrecord, etc.)</li>
 	      <li><strong>Knowledge base</strong>: special graph that connects rules and facts together</li>
 	      <li><strong>Inference Engine</strong>: Rete Algorhtm</li>
+	    </ul>
+	  </section>
+
+	  <section>
+	    <h1>Rete Algorithm</h1>
+	    <ul>
+	      <li>Latin for 'net' or 'comb'</li>
+	      <li>Represents rules as a (directed acyclic) graph</li>
+	      <li>Trades memory for increased speed</li>
+	      <li>Performance is (theoretically) independent of the total number of rules</li>
+	      <li>Forward chaining vs. backward chaining used by Prolog</li>
 	    </ul>
 	  </section>
 
@@ -135,15 +145,112 @@
 	  </section>
 
 	  <section>
-	  <h1>Rete Algorithm</h1>
-	  <ul>
-	    <li>Latin for 'net' or 'comb'</li>
-	    <li>Represents rules as a (directed acyclic) graph</li>
-	    <li>Trades memory for increased speed</li>
-	    <li>Performance is (theoretically) independent of the total number of rules</li>
-	    <li>Forward chaining vs. backward chaining used by Prolog</li>
-	  </ul>
-	</section>
+	    <h3>College Application Processor</h3>
+	    <ul>
+	      <li>Facts: applicant, parents, grades</li>
+	      <li>Rules: acceptance criteria, financial aid criteria</li>
+	    </ul>
+	  </section>
+
+	  <section>
+	    <h3>Facts</h3>
+	    <pre><code data-trim>
+(defrecord Applicant [name age])
+(defrecord Grade [type score])
+(defrecord Parents [income alumni?])
+
+(defrecord Accept [])
+(defrecord Aid [amount])
+	    </code></pre>
+	    <p>Must use facts for input and output</p>
+	  </section>
+
+	  <section>
+	    <h3>Rule 1</h3>
+	    <pre><code data-trim>
+(defrule good-enough-grades
+  [Grade  (= type :gpa) (> score 3.0)]
+  [:or
+   [Grade (= type :sat) (> score 1500)]
+   [Grade (= type :act) (> score 20)]]
+  =>
+  (insert! (->Accept)))
+	    </code></pre>
+	  </section>
+
+	  <section>
+	    <img src="diagram/rule1.png" style="border: none; box-shadow: none;" height="600px" alt="rule1">
+	  </section>
+
+	  <section>
+	    <img src="diagram/network1.png" style="border: none; box-shadow: none;" alt="network1">
+	  </section>
+
+	  <section>
+	    <h3>Rule 2</h3>
+	    <pre><code data-trim>
+(defrule rich-parents
+  [Parents (> income 2000000)]
+  =>
+  (insert! (->Accept)))
+	    </code></pre>
+	  </section>
+
+	  <section>
+	    <img src="diagram/rule2.png" style="border: none; box-shadow: none;" height="600px" alt="rule2">
+	  </section>
+
+	  <section>
+	    <img src="diagram/network2.png" style="border: none; box-shadow: none;" alt="network2">
+	  </section>
+
+	  <section>
+	    <h3>Rule 3</h3>
+	    <pre><code data-trim>
+(defrule aid-package
+  [Accept]
+  [Applicant (< age 26)]
+  [Parents (< income 60000)]
+  =>
+  (insert! (->Aid 20000)))
+	    </code></pre>
+	  </section>
+
+	  <section>
+	    <img src="diagram/rule3.png" style="border: none; box-shadow: none;" height="700px" alt="rule3">
+	  </section>
+
+	  <section>
+	    <img src="diagram/network3.png" style="border: none; box-shadow: none;" alt="network3">
+	  </section>
+
+	  <section>
+	    <h3>Run Rules Engine</h3>
+	    <pre><code data-trim>
+(def facts
+  [(->Applicant "Phil" 22)
+   (->Parents 50000 false)
+   (->Grade :gpa 3.1)
+   (->Grade :sat 1650)])
+
+(defn -main
+  (let [session
+        (-> (mk-session 'examples.college :cache false)
+            (insert-all facts)
+            (fire-rules))]
+    (-> session
+        (query get-acceptance) (->> (map  :?accept))
+        count pos? (->> (str "Accepted: ")) println)
+    (-> session
+        (query get-aid) first :?aid :amount (or 0)
+        (->> (str "Aid     : ")) println)))
+	    </code></pre>
+	    <p>=&gt;</p>
+	    <pre><code data-trim>
+Accepted: true
+Aid     : 20000
+	    </code></pre>
+	  </section>
 
 	</section>
 

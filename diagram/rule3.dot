@@ -1,0 +1,37 @@
+digraph {
+graph [bgcolor=transparent];
+"0--812887947" [shape=diamond,label=and];
+"1--812887947" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Accept</b></td></tr><tr><td>[]</td></tr></table>>];
+"2--812887947" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Applicant</b></td></tr><tr><td>[(&lt; age 26)]</td></tr></table>>];
+"3--812887947" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Parents</b></td></tr><tr><td>[(&lt; income 60000)]</td></tr></table>>];
+"1--812887947" -> "0--812887947";
+"2--812887947" -> "0--812887947";
+"3--812887947" -> "0--812887947";
+"-812887947" [shape=rectangle,style=bold,label=<<table border="0" cellborder="0"><tr><td>examples.college/aid-package</td></tr><tr><td>(clara.rules/insert! (examples.college/-&gt;Aid 20000))</td></tr></table>>];
+"0--812887947" -> "-812887947";
+"0-163921633" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Parents</b></td></tr><tr><td>[(&gt; income 2000000)]</td></tr></table>>];
+"163921633" [shape=rectangle,style=bold,label=<<table border="0" cellborder="0"><tr><td>examples.college/rich-parents</td></tr><tr><td>(clara.rules/insert! (examples.college/-&gt;Accept))</td></tr></table>>];
+"0-163921633" -> "163921633";
+"0-600555306" [shape=diamond,label=and];
+"1-600555306" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Grade</b></td></tr><tr><td>[(= type :gpa) (&gt; score 3.0)]</td></tr></table>>];
+"2-600555306" [shape=diamond,label=or];
+"3-600555306" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Grade</b></td></tr><tr><td>[(= type :sat) (&gt; score 1500)]</td></tr></table>>];
+"4-600555306" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Grade</b></td></tr><tr><td>[(= type :act) (&gt; score 20)]</td></tr></table>>];
+"1-600555306" -> "0-600555306";
+"2-600555306" -> "0-600555306";
+"3-600555306" -> "2-600555306";
+"4-600555306" -> "2-600555306";
+"600555306" [shape=rectangle,style=bold,label=<<table border="0" cellborder="0"><tr><td>examples.college/good-enough-grades</td></tr><tr><td>(clara.rules/insert! (examples.college/-&gt;Accept))</td></tr></table>>];
+"0-600555306" -> "600555306";
+"0-944190516" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Accept</b></td></tr><tr><td>[]</td></tr></table>>];
+"944190516" [shape=rectangle,style=bold,label=<<table border="0" cellborder="0"><tr><td>examples.college/get-acceptance</td></tr><tr><td></td></tr></table>>];
+"0-944190516" -> "944190516";
+"0--1121878340" [shape=ellipse,label=<<table border="0" cellborder="0"><tr><td><b>Aid</b></td></tr><tr><td>[]</td></tr></table>>];
+"-1121878340" [shape=rectangle,style=bold,label=<<table border="0" cellborder="0"><tr><td>examples.college/get-aid</td></tr><tr><td></td></tr></table>>];
+"0--1121878340" -> "-1121878340";
+"-812887947" -> "0--1121878340" [style=dashed];
+"163921633" -> "0-944190516" [style=dashed];
+"163921633" -> "1--812887947" [style=dashed];
+"600555306" -> "0-944190516" [style=dashed];
+"600555306" -> "1--812887947" [style=dashed];
+} 

@@ -1,0 +1,19 @@
+digraph {
+graph [bgcolor=transparent];
+"0" -> "3";
+"3" -> "5";
+"1" -> "3";
+"3" -> "5";
+"0" [shape=diamond,label="JOIN ON: #{}"];
+"3" [shape=diamond,label="JOIN ON: #{}"];
+"5" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td>examples.college/good-enough-grades</td></tr><tr><td>(clara.rules/insert! (examples.college/-&gt;Accept))</td></tr></table>>];
+"1" [shape=diamond,label="JOIN ON: #{}"];
+"3" [shape=diamond,label="JOIN ON: #{}"];
+"5" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td>examples.college/good-enough-grades</td></tr><tr><td>(clara.rules/insert! (examples.college/-&gt;Accept))</td></tr></table>>];
+"1363085448" -> "1";
+"-1140831766" -> "3";
+"1691077385" -> "0";
+"1363085448" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td><b>Grade</b></td></tr><tr><td>[(= type :sat) (&gt; score 1500)]</td></tr></table>>];
+"-1140831766" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td><b>Grade</b></td></tr><tr><td>[(= type :gpa) (&gt; score 3.0)]</td></tr></table>>];
+"1691077385" [shape=rectangle,label=<<table border="0" cellborder="0"><tr><td><b>Grade</b></td></tr><tr><td>[(= type :act) (&gt; score 20)]</td></tr></table>>];
+} 
