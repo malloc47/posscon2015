@@ -243,7 +243,7 @@
    (->Grade :gpa 3.1)
    (->Grade :sat 1650)])
 
-(defn -main
+(defn run-rules []
   (let [session
         (-> (mk-session 'examples.college :cache false)
             (insert-all facts)
@@ -261,6 +261,7 @@ Aid     : 20000
 
 	<section>
 	  <h1>Performance</h1>
+	  <img src="img/fractical-gears.gif" style="border: none; box-shadow: none;" height="300px" alt="fractical-gears">
 	</section>
 
 	<section>
