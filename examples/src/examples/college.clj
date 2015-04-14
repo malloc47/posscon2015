@@ -1,6 +1,7 @@
 (ns examples.college
   (:require [clara.rules :refer :all]
-            [clara.tools.viz :as viz])
+            [clara.tools.viz :as viz]
+            [clara.tools.inspect :as inspect])
   (:gen-class))
 
 (defrecord Applicant [name age])
@@ -49,7 +50,7 @@
 
 (defn fact-generator
   []
-  #{(->Applicant (rand-nth sample-names) (rand-int 40))
+  #{(->Applicant (rand-nth sample-names) (+ 16 (rand-int 24)))
     (->Parents (rand-int 2000000) (rand-nth [true false]))
     (->Grade :gpa (rand 4.0))
     (->Grade :sat (+ 600 (rand-int 1800)))
@@ -78,7 +79,8 @@
              count pos? (->> (str "Accepted: ")) println)
          (-> session
              (query get-aid) first :?aid :amount (or 0)
-             (->> (str "Aid     : ")) println)))
+             (->> (str "Aid     : ")) println)
+         #_(inspect/explain-activations session)))
       (println))))
 
 (defn -main
