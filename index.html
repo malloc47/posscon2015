@@ -83,7 +83,7 @@
 		</ul>
 	      </li>
 	      <li>Business Rules</li>
-	      <li>Rete Algorithm (1974)</li>
+	      <li>Rete Algorithm (1974-2010)</li>
 	    </ul>
 	  </section>
 
@@ -124,6 +124,16 @@
 	      <li>Performance is (theoretically) independent of the total number of rules</li>
 	      <li>Forward chaining vs. backward chaining used by Prolog</li>
 	    </ul>
+	  </section>
+
+	  <section>
+	    <h3>Rete Algorithm Visualization</h3>
+	    <img src="img/rete1.png" style="border: none; box-shadow: none;" height="500px" alt="rete1">
+	    <p>
+	      <small>
+		<a href="http://www.drdobbs.com/architecture-and-design/the-rete-matching-algorithm/184405218">http://www.drdobbs.com/architecture-and-design/the-rete-matching-algorithm/184405218</a>
+	      </small>
+	    </p>
 	  </section>
 
 	  <section>
@@ -238,12 +248,7 @@
         (-> (mk-session 'examples.college :cache false)
             (insert-all facts)
             (fire-rules))]
-    (-> session
-        (query get-acceptance) (->> (map  :?accept))
-        count pos? (->> (str "Accepted: ")) println)
-    (-> session
-        (query get-aid) first :?aid :amount (or 0)
-        (->> (str "Aid     : ")) println)))
+    #_(print results here))
 	    </code></pre>
 	    <p>=&gt;</p>
 	    <pre><code data-trim>
