@@ -1,7 +1,6 @@
 (ns examples.college
   (:require [clara.rules :refer :all]
-            [clara.tools.viz :refer [show-logic!] :as viz]
-            [clojure.pprint :refer [pprint]])
+            [clara.tools.viz :as viz])
   (:gen-class))
 
 (defrecord Applicant [name age])
